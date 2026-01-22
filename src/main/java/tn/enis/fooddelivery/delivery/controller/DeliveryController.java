@@ -51,7 +51,7 @@ public class DeliveryController {
         return ResponseEntity.ok(deliveryService.acceptDelivery(id, livreurId));
     }
 
-    // Update delivery status
+  
     @PutMapping("/{id}/status")
     public ResponseEntity<Delivery> updateStatus(
             @PathVariable Long id,
@@ -60,7 +60,7 @@ public class DeliveryController {
         return ResponseEntity.ok(deliveryService.updateStatus(id, request.getStatus()));
     }
 
-    // Get delivery route (mock GPS)
+  
     @GetMapping("/{id}/route")
     public ResponseEntity<Map<String, String>> getRoute(@PathVariable Long id) {
         return ResponseEntity.ok(
@@ -68,7 +68,7 @@ public class DeliveryController {
         );
     }
 
-    // Create delivery
+   
     @PostMapping
     public ResponseEntity<Delivery> createDelivery(@RequestBody Delivery delivery) {
         return ResponseEntity.ok(deliveryService.createDelivery(delivery));

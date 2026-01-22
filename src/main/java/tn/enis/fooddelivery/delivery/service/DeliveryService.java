@@ -30,7 +30,7 @@ public class DeliveryService {
                 .orElseThrow(() -> new RuntimeException("Delivery not found"));
 
         delivery.setLivreurId(livreurId);
-        delivery.setStatus(DeliveryStatus.ACCEPTED);
+        delivery.setStatus(DeliveryStatus.ASSIGNED);
 
         return repository.save(delivery);
     }
