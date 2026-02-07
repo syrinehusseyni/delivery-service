@@ -1,4 +1,5 @@
-name: Java 21 Upgrade
-description: Upgrade to Java 21 LTS
+name: Java 17 Configuration
+description: OpenRewrite configuration for Java 17 LTS project
 recipeList:
-  - org.openrewrite.java.migrate.UpgradeToJava21
+  - org.openrewrite.java.cleanup.NoValueOf
+  - org.openrewrite.java.cleanup.RemoveUnusedImports
