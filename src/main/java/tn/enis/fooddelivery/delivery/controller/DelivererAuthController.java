@@ -1,17 +1,30 @@
 package tn.enis.fooddelivery.delivery.controller;
 
+import feign.FeignException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import tn.enis.fooddelivery.delivery.dto.ErrorResponse;
-import tn.enis.fooddelivery.delivery.dto.LoginRequest;
-import tn.enis.fooddelivery.delivery.dto.LoginResponse;
-import tn.enis.fooddelivery.delivery.model.Deliverer;
-import tn.enis.fooddelivery.delivery.repository.DelivererRepository;
-import tn.enis.fooddelivery.delivery.util.JwtTokenProvider;
+import tn.enis.fooddelivery.delivery.client.AdminAuthClient;
 
-import java.util.Optional;
+@RestController
+@RequestMapping("/api/deliverer/auth")
+public class DelivererAuthController {
+
+    @Autowired
+    private AdminAuthClient adminAuthClient;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AdminAuthClient.LoginRequest loginRequest) {
+        try {
+            AdminAuthClient.LoginResponse response = adminAuthClient.login(loginRequest);
+            return ResponseEntity.ok(response);  // forward JWT to deliverer client
+        } catch (FeignException e) {
+            return ResponseEntity.status(e.status()).body(e.getMessage());
+        }
+    }
+}
+
+/*
 
 @RestController
 @RequestMapping("/api/auth")
@@ -72,3 +85,4 @@ public class AuthController {
     }
 
 }
+*/
